@@ -1,1 +1,47 @@
-<p>cadastro works!</p>
+<!-- <div>
+  <label for="nome" class="form-label">Nome</label>
+  <input class="form-control" name="nome" id="nome" [(ngModel)]="usuario.nome">
+  <label for="email" class="form-label">email</label>
+  <input class="form-control" name="email" id="email" [(ngModel)]="usuario.email">
+  <label for="senha" class="form-label">senha</label>
+  <input class="form-control" type="password" name="senha" id="senha" [(ngModel)]="usuario.email">
+  <button type="button" class="btn btn-success" (click)="adicionar()">{{textoBotao}}</button>
+</div> -->
+
+
+<div style="margin: 5rem 1rem 3rem 1rem">
+  <h1 style="text-align: center; margin-bottom: 3rem">Cadastrar</h1>
+  <ng-container *ngIf="usuario?.tipo === 1">
+
+    <form [formGroup]="cadastroForm" #professorForm="ngForm" nome="professorForm" (ngSubmit)="cadastrar()">
+      <div class="form-group">
+        <label for="tx-nome">Nome</label>
+        <input type="text" class="form-control" #nome formControlName="nome" id="tx-nome" placeholder="Nome" required>
+      </div>
+      <div class="form-group">
+        <label for="tx-nome">Email</label>
+        <input type="email" class="form-control" #nome formControlName="nome" id="tx-nome" placeholder="Nome" required>
+      </div>
+      <div class="form-group">
+        <label for="tx-senha">Senha</label>
+        <input type="password" class="form-control" formControlName="senha" id="tx-senha" placeholder="Senha" required>
+      </div>
+      <button [disabled]="!professorForm.form.valid" type="submit" class="btn btn-primary">Cadastrar Professor</button>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="usuario?.tipo === 2">
+    <form [formGroup]="cadastrarAlunoForm" #alunoForm="ngForm" nome="alunoForm" (ngSubmit)="cadastrarAluno()">
+      <div class="form-group">
+        <label for="tx-nome">Nome</label>
+        <input type="text" class="form-control" formControlName="nome" id="tx-nome" placeholder="Nome" required>
+      </div>
+      <div class="form-group">
+        <label for="tx-senha">Senha</label>
+        <input type="password" class="form-control" formControlName="senha" id="tx-senha" placeholder="Senha" required>
+      </div>
+      <button [disabled]="!alunoForm.form.valid" type="submit" class="btn btn-primary">Cadastrar Aluno</button>
+    </form>
+  </ng-container>
+
+</div>
