@@ -8,12 +8,12 @@
   <button type="button" class="btn btn-success" (click)="adicionar()">{{textoBotao}}</button>
 </div> -->
 
-
+<!-- Verificar motivo da diretiva do FormGroup está apresentando callback maximo e passar o tipo já diretamente para o usuário -->
 <div style="margin: 5rem 1rem 3rem 1rem">
   <h1 style="text-align: center; margin-bottom: 3rem">Cadastrar</h1>
-  <ng-container *ngIf="usuario?.tipo === 1">
+  <!-- <ng-container *ngIf="usuario?.tipo === 1"> -->
 
-    <form [formGroup]="cadastroForm" #professorForm="ngForm" nome="professorForm" (ngSubmit)="cadastrar()">
+    <form [formGroup]="cadastroForm" #cadastroForm="ngForm" nome="cadastroForm" (ngSubmit)="cadastrar()">
       <div class="form-group">
         <label for="tx-nome">Nome</label>
         <input type="text" class="form-control" #nome formControlName="nome" id="tx-nome" placeholder="Nome" required>
@@ -26,9 +26,9 @@
         <label for="tx-senha">Senha</label>
         <input type="password" class="form-control" formControlName="senha" id="tx-senha" placeholder="Senha" required>
       </div>
-      <button [disabled]="!professorForm.form.valid" type="submit" class="btn btn-primary">Cadastrar Professor</button>
+      <button [disabled]="!cadastroForm.form.valid" type="submit" class="btn btn-primary">Cadastrar Professor</button>
     </form>
-  </ng-container>
+  <!-- </ng-container> -->
 
   <ng-container *ngIf="usuario?.tipo === 2">
     <form [formGroup]="cadastrarAlunoForm" #alunoForm="ngForm" nome="alunoForm" (ngSubmit)="cadastrarAluno()">

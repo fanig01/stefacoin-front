@@ -1,3 +1,5 @@
+import { AuthService } from 'src/app/services/auth.service';
+import { filter } from 'rxjs/operators';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Mensagem } from './../../../models/mensagem';
 import { ToastrService } from 'ngx-toastr';
@@ -6,7 +8,7 @@ import { SignupService } from './../../../services/signup.service';
 import { Professor } from './../../../models/professor';
 import { ProfessorService } from './../../../services/professor.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -25,6 +27,7 @@ export class CadastroComponent implements OnInit {
   cadastroForm: FormGroup = new FormGroup({
     nome: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
+    senha: new FormControl('', Validators.required),
   });
 
   constructor(
@@ -32,11 +35,14 @@ export class CadastroComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private professorService: ProfessorService,
-    private signupService: SignupService
-    // private authService: AuthService
+    private signupService: SignupService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
+      this.usuario = this.authService.getUsuario();
+    });
     // console.log("nome", this.professor.nome)
     // if(this.authService.isAuthenticated()) {
     //   this.router.nvigate(['/nova-conta'])
